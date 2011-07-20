@@ -13,9 +13,8 @@ class TumblrTag < Sinatra::Base
     connection = Excon.new("http://www.tumblr.com/")
 
     featured = connection.request(:method => "GET", :path => "/tagged/#{tag}").body
-    popular  = connection.request(:method => "GET", :path => "/tagged/#{tag}/popular").body
 
-    pages = [featured, popular]
+    pages = [featured]
 
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.rss :version => "2.0" do
